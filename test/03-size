@@ -1,0 +1,6 @@
+#read sequence size from file
+faops size ~/faops/test/ufasta.fa | head -n 2
+
+#read sequence size from a gzipped file
+faops size ~/faops/test/ufasta.fa.gz | head -n 2
+
