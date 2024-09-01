@@ -10,6 +10,7 @@
 
 faops command:<br>
 >* [help](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#help)
+>* [count](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#count)
 
 ## faops installing and compiling
 ```
@@ -53,3 +54,44 @@ Options:
     Type "faops command-name" for detailed options of each command.
     Options *MUST* be placed just after command.
 ```
+* ### count #count base statistics
+count base statistics in `file`:<br>
+
+input
+```
+faops count ~/faops/test/ufasta.fa | head -n 2
+#bash -c "faops count ~/faops/test/ufasta.fa | head -n 2"
+```
+output
+```
+#seq    len     A       C       G       T       N
+read0   359     99      89      92      79      0
+```
+count base ststistics in `stdin`:<br>
+
+input
+```
+cat ~/faops/test/ufasta.fa | faops count stdin| head -n 2
+```
+count `mixture` of stdin and actual file:<br>
+
+input
+```
+cat ~/faops/test/ufasta.fa | faops count stdin ~/faops/test/ufasta.fa | wc -l
+```
+output
+```
+102
+```
+count `total` bases:<br>
+
+input
+```
+bash -c "faops count ~/faops/test/ufasta.fa | perl -ne '/^total\\t(\\d+)/ and print \$1'"
+#bash -c "faops count ~/faops/test/ufasta.fa | grep '^total' | cut -f 2"
+```
+output
+```
+9317
+```
+* ### size
