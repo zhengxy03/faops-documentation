@@ -1,1 +1,14 @@
+#get help
+faops help && echo "$?"
 
+#get count in help 
+faops help | grep "Usage"
+
+#count lines of coutents in help
+faops help | wc -l
+#count=$(faops help | wc -l)
+#if [ "$count" -eq 27 ]; then
+#  echo "Success: The number of lines is 27."
+#else
+#  echo "Failure: The number of lines is not 27."
+#fi
