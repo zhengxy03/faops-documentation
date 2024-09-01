@@ -4,3 +4,14 @@ faops size ~/faops/test/ufasta.fa | head -n 2
 #read sequence size from a gzipped file
 faops size ~/faops/test/ufasta.fa.gz | head -n 2
 
+#read from stdin
+cat ~/faops/test/ufasta.fa | faops size stdin| head -n 2
+
+#output the number of lines of size result
+faops size ~/faops/test/ufasta.fa | wc -l 
+
+#mixture of stdin and actual file
+cat ~/faops/test/ufasta.fa | faops size stdin ~/faops/test/ufasta.fa | wc -l
+ 
+#count total bases
+bash -c "faops size ~/faops/test/ufasta.fa | perl -ane '\$c += \$F[1]; END { print qq{\$c\n} }'"
