@@ -132,3 +132,24 @@ output
 ```
 9317
 ```
+* ### frag #extract sub-sequence
+extract sub-sequences from a `file`:
+
+input
+```
+faops frag ~/faops/test/ufasta.fa 1 10 stdout | grep -v "^>"
+```
+output
+```
+tCGTTTAACC
+```
+extract sub-sequences from `stdin`:
+
+input
+```
+faops some ~/faops/test/ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 stdout | grep -v "^>"
+```
+output
+```
+AGCgCcccaa
+```
