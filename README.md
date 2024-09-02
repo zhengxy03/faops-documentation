@@ -94,4 +94,41 @@ output
 ```
 9317
 ```
-* ### size
+* ### size # count total bases in FA file(s)
+read sequence size from `file`：
+
+input
+```
+faops size ~/faops/test/ufasta.fa | head -n 2
+```
+output
+```
+read0   359
+read1   106
+```
+read from `stdin`:
+
+input
+```
+cat ~/faops/test/ufasta.fa | faops size stdin| head -n 2
+```
+`mixture` of stdin and actual file:
+
+input
+```
+cat ~/faops/test/ufasta.fa | faops size stdin ~/faops/test/ufasta.fa | wc -l
+```
+output
+```
+100
+```
+count `total` bases:
+
+input
+```
+bash -c "faops size ~/faops/test/ufasta.fa | perl -ane '\$c += \$F[1]; END { print qq{\$c\n} }'"
+```
+output
+```
+9317
+```
