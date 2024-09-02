@@ -55,7 +55,10 @@ Options:
     Options *MUST* be placed just after command.
 ```
 * ### count #count base statistics
-count base statistics in `file`:<br>
+> usage:
+> 　　faops count <in.fa> [more_files.fa]
+
+    ** count base statistics in `file`:<br>
 
 input
 ```
@@ -95,6 +98,11 @@ output
 9317
 ```
 * ### size # count total bases in FA file(s)
+> usage:
+> 　　faops size <in.fa> [more_files.fa]
+>    　　
+> in.fa  == stdin  means reading from stdin
+
 read sequence size from `file`：
 
 input
@@ -133,6 +141,15 @@ output
 9317
 ```
 * ### frag #extract sub-sequence
+> usage:
+> 　　　faops frag [options] <in.fa> <start> <end> <out.fa>
+> 
+> options:
+> 　　　-l INT　　　sequence line length [80]
+
+> in.fa  == stdin  means reading from stdin
+> out.fa == stdout means writing to stdout
+
 extract sub-sequences from a `file`:
 
 input
@@ -152,4 +169,64 @@ faops some ~/faops/test/ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 
 output
 ```
 AGCgCcccaa
+```
+* ### rc #reverse complement
+> usage:<br>
+>　　　faops rc [options] <in.fa> <out.fa>
+> 
+> options:<br>
+>　　　-n　　　　　keep name identical (don't prepend RC_)<br>
+>　　　-r　　　　　just Reverse, prepends R_<br>
+>　　　-c　　　　　just Complement, prepends C_<br>
+>　　　-f STR　　　only RC sequences in this list.file<br>
+>　　　-l INT　　　sequence line length [80]
+> 
+> in.fa  == stdin  means reading from stdin<br>
+> out.fa == stdout means writing to stdout
+
+reverse complement a fa `file`:
+
+input
+```
+faops rc -n ~/faops/test/ufasta.fa stdout | faops size stdin
+```
+output
+```
+read0   359
+read1   106
+read2   217
+...
+read49  358
+```
+`double` rc:
+
+input
+```
+faops rc -n ~/faops/test/ufasta.fa stdout | faops rc -n stdin stdout
+```
+output
+```
+>read0
+tCGTTTAACCCAAatcAAGGCaatACAggtGggCCGccCatgTcAcAAActcgatGAGtgGgaAaTGgAgTgaAGcaGCA
+tCtGctgaGCCCCATTctctAgCggaaaATGgtatCGaACcGagataAGtTAAacCgcaaCgGAtaagGgGcgGGctTCA
+aGtGAaGGaAGaGgGgTTcAaaAgGccCgtcGtCaaTcAaCtAAggcGgaTGtGACactCCCCtAtTtcaaGTCTTctaC
+ccTtGaTaCGaTtcgCGTtcGaGGaGcTACaTTAaccaaGtTaatgCGAGCGcCtgCGaAcTTGccAAgTCaGCtgctCT
+gttCtcAggTaCAcAaGTcagccAtTGTGTCGaCGCTCT
+...
+>read 49
+aActgggCctTtcGgaAtAAAtGATTctActtTGTcTaatCatTcAgggAGagccGCCTTcaATTACGGcGgaaCAtGGg
+tctGTtCAGaggTgAATTCAAATGCtGagGcaAGatcccCgATTCAcCgGgAaGcCTGtTcgTtCCgtCAtGTGgCtcaa
+tAgcACgCCAaCaGTactggCctcgTCcCatTTGCGCATtCTtatAcGtGCatCagTttTATaacAtTATcCgCGaCcCa
+GcaAaAAaGcGTgaAgtTgCTaATttaaTcatcAcaGaCCAaGCaCttcTTAAcTtttGAagGAGGattaaaGGGTcacA
+ggAcCTtCgtCtccaccGaCaGATCgAcgCGTGgcCCG
+```
+rc with `list.file`:
+
+input
+```
+faops rc -l 0 -f <(echo read47) ~/faops/test/ufasta.fa stdout | grep '^>RC_'
+```
+output
+```
+>RC_read47
 ```
