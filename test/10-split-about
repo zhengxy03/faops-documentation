@@ -1,0 +1,2 @@
+#split 2000 bp
+faops split-about ~/faops/test/ufasta.fa 2000 split2000bp  && find split2000bp -name '*.fa' | wc -l
