@@ -16,6 +16,8 @@ faops command:<br>
 >* [rc](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#rc)
 >* [one](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#one)
 >* [some](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#some)
+>* [filter](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#filter)
+>* [split-name](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-name)
 
 ## faops installing and compiling
 ```
@@ -441,4 +443,31 @@ output
 read0
 ...
 read49
+```
+* ### split-name
+> usage:<br>
+> 　　faops split-name [options] <in.fa> <outdir>
+> 
+> options:<br>
+> 　　-l INT　　　　sequence line length [80]
+
+split `all seq`:
+
+input
+```
+faops split-name ~/faops/test/ufasta.fa splitnameresult && find splitnameresult -name '*.fa' | wc -l
+```
+output
+```
+50
+```
+split-name `size restrict`:
+
+input
+```
+faops filter -a 10 ~/faops/test/ufasta.fa stdout | faops split-name stdin splitnameleast10 && find splitnameleast10 -name '*.fa' | wc -l
+```
+output
+```
+44
 ```
