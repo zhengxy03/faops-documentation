@@ -293,3 +293,152 @@ read13
 ...
 read49
 ```
+* ### filter
+> usage:<br>
+> 　　faops filter [options] <in.fa> <out.fa>
+> 
+> options:<br>
+> 　　-a INT　　　pass sequences at least this big ('a'-smallest)<br>
+> 　　-z INT　　　pass sequences this size or smaller ('z'-biggest)<br>
+> 　　-n INT　　　pass sequences with fewer than this number of N's<br>
+> 　　-u　　　　　Unique, removes duplicated ids, keeping the first<br>
+> 　　-U　　　　　Upper case, converts all sequences to upper cases<br>
+> 　　-b　　　　　pretend to be a blocked fasta file<br>
+> 　　-N　　　　　convert IUPAC ambiguous codes to 'N'<br>
+> 　　-d　　　　　remove dashes '-'<br>
+> 　　-s　　　　　simplify sequence names<br>
+> 　　-l INT　　　sequence line length [80]
+
+filter every sequence in `one line`：
+
+input
+```
+faops filter -l 0 ~/faops/test/ufasta.fa stdout | wc -l
+```
+output
+```
+100
+```
+filter `blocked` file:
+
+input
+```
+faops filter -b ~/faops/test/ufasta.fa stdout | wc -l
+```
+output
+```
+150
+```
+filter identical `headers`:
+
+input
+```
+faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep '^>'
+```
+output
+```
+read0
+...
+read49
+```
+filter identical `sequences`:
+
+input
+```
+faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -v '^>' | perl -ne 'chomp; print'
+```
+output
+```
+tCGTTT...gAcCTtCgtCtccaccGaCaGATCgAcgCGTGgcCCG
+```
+fliter `-N`:
+
+input
+```
+faops filter -l 0 -N ~/faops/test/ufasta.fa.gz stdout | grep -v '^>' | perl -ne 'chomp; print'
+```
+output
+```
+tCGTTT...gAcCTtCgtCtccaccGaCaGATCgAcgCGTGgcCCG
+```
+test filter -N (convert `IUPAC to N`):
+
+input
+```
+faops filter -l 0 -N <(printf ">read\n%s\n" AMRG) stdout
+```
+output
+```
+>read
+ANNG
+```
+`remove dashes`:
+
+input
+```
+faops filter -d <(printf ">read\n%s\n" A-RG) stdout
+```
+output
+```
+>read
+ARG
+```
+`upper` cases:
+
+input
+```
+faops filter -U <(printf ">read\n%s\n" AtcG) stdout
+```
+output
+```
+>read
+ATTG
+```
+`simplify` seq names:
+
+input
+```
+faops filter -s <(printf ">read.1\n%s\n" ANNG) stdout
+```
+output
+```
+>read
+ANNG
+```
+`fastq` to fasta:
+
+input
+```
+faops filter ~/faops/test/test.seq stdout | wc -l
+```
+output
+```
+6
+```
+filter `minsize maxsize`:
+
+input
+```
+faops filter -a 10 -z 50 ~/faops/test/ufasta.fa stdout | grep '^>'
+```
+output
+```
+>read20
+>read30
+>read31
+>read42
+>read43
+>read46
+```
+removes `duplicated` ids:
+
+input
+```
+faops filter -u -a 1 <(cat ~/faops/test/ufasta.fa ~/faops/test/ufasta.fa) stdout | grep '^>'
+```
+output
+```
+read0
+...
+read49
+```
