@@ -11,6 +11,11 @@
 faops command:<br>
 >* [help](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#help)
 >* [count](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#count)
+>* [size](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#size)
+>* [frag](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#frag)
+>* [rc](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#rc)
+>* [one](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#one)
+>* [some](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#some)
 
 ## faops installing and compiling
 ```
@@ -250,4 +255,41 @@ output
 ```
 >read12
 AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaAgacTCCGCcCAcCTAttagccaGcCGtCtGcccCacCaGgGgcTtAtaAGAGgaGGCtttCtaGGTcCcACTtGgggTCaGCCcccaTGCgTGGtCtGTGTcCatgTCCtCCTCTaGCaCCCCTCgCAgctCCtAataCgAAGGaGCAtcaCAgGacgAgacgAcAtTcTcCaACcgtGGctCgGTCGGaCCcCGTAAcATTgCGgcAaAtGagCTaTtagGGATCGacTatgatCcGGCtGagtgAgaAtAtgGAcCtATcGtggGAgCACCtAtagTtcTaTAGGacgGgcAtcTCGCGcCaaggGcTggGaTTgTCTgtTACctCtagGTAGaGggcTaaatCca
+```
+* ### some
+> usage:<br>
+> 　　faops some [options] <in.fa> <list.file> <out.fa>
+> 
+> options:<br>
+> 　　-i         Invert, output sequences not in the list<br>
+> 　　-l INT     sequence line length [80]
+> 
+> in.fa  == stdin  means reading from stdin<br>
+> out.fa == stdout means writing to stdout
+
+extract `one` fa record:
+
+input
+```
+faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -A 1 '^>read12'| faops some -l 0 ~/faops/test/ufasta.fa <(echo read12) stdout
+```
+output
+```
+>read12
+AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaAgacTCCGCcCAcCTAttagccaGcCGtCtGcccCacCaGgGgcTtAtaAGAGgaGGCtttCtaGGTcCcACTtGgggTCaGCCcccaTGCgTGGtCtGTGTcCatgTCCtCCTCTaGCaCCCCTCgCAgctCCtAataCgAAGGaGCAtcaCAgGacgAgacgAcAtTcTcCaACcgtGGctCgGTCGGaCCcCGTAAcATTgCGgcAaAtGagCTaTtagGGATCGacTatgatCcGGCtGagtgAgaAtAtgGAcCtATcGtggGAgCACCtAtagTtcTaTAGGacgGgcAtcTCGCGcCaaggGcTggGaTTgTCTgtTACctCtagGTAGaGggcTaaatCca
+```
+extract some fa records `exclude` ..:
+
+input
+```
+faops some -i ~/faops/test/ufasta.fa <(echo read12) stdout | grep '^>'
+```
+output
+```
+read0
+...
+read11
+read13
+...
+read49
 ```
