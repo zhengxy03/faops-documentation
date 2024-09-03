@@ -55,10 +55,10 @@ Options:
     Options *MUST* be placed just after command.
 ```
 * ### count #count base statistics
-> usage:
+> usage:<br>
 > 　　faops count <in.fa> [more_files.fa]
 
-    ** count base statistics in `file`:<br>
+count base statistics in `file`:<br>
 
 input
 ```
@@ -98,9 +98,9 @@ output
 9317
 ```
 * ### size # count total bases in FA file(s)
-> usage:
+> usage:<br>
 > 　　faops size <in.fa> [more_files.fa]
->    　　
+> 
 > in.fa  == stdin  means reading from stdin
 
 read sequence size from `file`：
@@ -141,12 +141,12 @@ output
 9317
 ```
 * ### frag #extract sub-sequence
-> usage:
+> usage:<br>
 > 　　　faops frag [options] <in.fa> <start> <end> <out.fa>
 > 
-> options:
+> options:<br>
 > 　　　-l INT　　　sequence line length [80]
-
+> 
 > in.fa  == stdin  means reading from stdin
 > out.fa == stdout means writing to stdout
 
@@ -229,4 +229,25 @@ faops rc -l 0 -f <(echo read47) ~/faops/test/ufasta.fa stdout | grep '^>RC_'
 output
 ```
 >RC_read47
+```
+* ### one
+> usage:<br>
+　　　faops some [options] <in.fa> <name> <out.fa>
+> 
+> options:<br>
+>　　　-l INT     sequence line length [80]
+> 
+> in.fa  == stdin  means reading from stdin
+> out.fa == stdout means writing to stdout
+
+extract `one` fa record:
+
+input
+```
+faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -A 1 '^>read12'| faops one -l 0 ~/faops/test/ufasta.fa read12 stdout
+```
+output
+```
+>read12
+AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaAgacTCCGCcCAcCTAttagccaGcCGtCtGcccCacCaGgGgcTtAtaAGAGgaGGCtttCtaGGTcCcACTtGgggTCaGCCcccaTGCgTGGtCtGTGTcCatgTCCtCCTCTaGCaCCCCTCgCAgctCCtAataCgAAGGaGCAtcaCAgGacgAgacgAcAtTcTcCaACcgtGGctCgGTCGGaCCcCGTAAcATTgCGgcAaAtGagCTaTtagGGATCGacTatgatCcGGCtGagtgAgaAtAtgGAcCtATcGtggGAgCACCtAtagTtcTaTAGGacgGgcAtcTCGCGcCaaggGcTggGaTTgTCTgtTACctCtagGTAGaGggcTaaatCca
 ```
