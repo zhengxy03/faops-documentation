@@ -18,6 +18,7 @@ faops command:<br>
 >* [some](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#some)
 >* [filter](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#filter)
 >* [split-name](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-name)
+>* [split-about](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-about)
 
 ## faops installing and compiling
 ```
@@ -471,3 +472,67 @@ output
 ```
 44
 ```
+* ### split-about
+> usage:<br>
+> 　　faops split-about [options] <in.fa> <approx_size> <outdir>
+> 
+> options:<br>
+> 　　-e　　　　　sequences in one file should be EVEN<br>
+> 　　-m INT　　　max parts<br>
+> 　　-l INT　　　sequence line length [80]
+
+split 2000 bp:
+
+input
+```
+faops split-about ~/faops/test/ufasta.fa 2000 split2000bp  && find split2000bp -name '*.fa' | wc -l
+```
+output
+```
+5
+```
+split `max` file numbers:
+
+input
+```
+faops split-about -m 2 ~/faops/test/ufasta.fa 2000 maxparts && find maxparts -name'*.fa' | wc -l
+```
+output
+```
+2
+```
+split 2000 bp and size restrict:
+
+input
+```
+faops filter -a 100 ~/faops/test/ufasta.fa stdout | faops split-about stdin 2000 2000bpandsize && find 2000bpandsize -name '*.fa' | wc -l
+```
+output
+```
+4
+```
+split seq in one file `evenly`:
+
+input
+```
+faops split-about ~/faops/test/ufasta.fa 1 123 && find 1 even -name '*.fa' | wc-
+faops split-about -e ~/faops/test/ufasta.fa 1 123 && find 1 even -name '*.fa' | wc-l
+```
+output
+```
+50
+26
+```
+* ### n50
+> usage:<br>
+> 　　faops n50 [options] <in.fa> [more_files.fa]
+> 
+> options:<br>
+> 　　-H　　　　　do not display header<br>
+> 　　-N INT　　　compute Nx statistic [50]<br>
+> 　　-S　　　　　compute sum of size of all entries<br>
+> 　　-A　　　　　compute average length of all entries<br>
+> 　　-E　　　　　compute the E-size (from GAGE)<br>
+> 　　-C　　　　　count entries<br>
+> 　　-g INT　　　size of genome, instead of total size in files
+
