@@ -1,0 +1,11 @@
+cd ~/faops/test
+
+#test n50
+faops n50 ufasta.fa
+
+#don't display header
+faops n50 -H ufasta.fa
+
+#set genome size
+faops n50 -H -g 10000 ufasta.fa
+
