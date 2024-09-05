@@ -19,6 +19,7 @@ faops command:<br>
 >* [filter](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#filter)
 >* [split-name](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-name)
 >* [split-about](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-about)
+>* [n50](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#n50)
 
 ## faops installing and compiling
 ```
@@ -535,4 +536,75 @@ output
 > 　　-E　　　　　compute the E-size (from GAGE)<br>
 > 　　-C　　　　　count entries<br>
 > 　　-g INT　　　size of genome, instead of total size in files
+
+don't display header:
+
+input
+```
+faops n50 -H ufasta.fa
+```
+output
+```
+314
+```
+set genome size:
+
+input
+```
+faops n50 -H -g 10000 ufasta.fa
+```
+output
+```
+297
+```
+sum and average of seq size:
+
+input
+```
+faops n50 -H -S -A ufasta.fa
+```
+output
+```
+314
+9317
+186.34
+```
+calculate E-size:
+
+input
+```
+faops n50 -H -E ufasta.fa
+```
+output
+```
+314
+314.70
+```
+calculate N10:
+
+input
+```
+faops n50 -H -N 10 ufasta.fa
+```
+output
+```
+516
+```
+only count of sequences:
+
+input
+```
+faops n50 -N 0 -C ufasta.fa
+```
+output
+```
+C       50
+```
+
+* ### order
+> usage:<br>
+> 　　faops order [options] <in.fa> <list.file> <out.fa>
+> 
+> options:<br>
+> 　　-l INT　　　sequence line length [80]
 
