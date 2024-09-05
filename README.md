@@ -20,6 +20,8 @@ faops command:<br>
 >* [split-name](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-name)
 >* [split-about](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-about)
 >* [n50](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#n50)
+>* [order](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#order)
+>* [replace](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#replace)
 
 ## faops installing and compiling
 ```
@@ -607,4 +609,31 @@ C       50
 > 
 > options:<br>
 > 　　-l INT　　　sequence line length [80]
+
+input
+```
+faops order -l 0 ufasta.fa <(echo read12 read5) stdout
+```
+output
+```
+>read12
+AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaAgacTCCGCcCAcCTAttagccaGcCGtCtGcccCacCaGgGgcTtAtaAGAGgaGGCtttCtaGGTcCcACTtGgggTCaGCCcccaTGCgTGGtCtGTGTcCatgTCCtCCTCTaGCaCCCCTCgCAgctCCtAataCgAAGGaGCAtcaCAgGacgAgacgAcAtTcTcCaACcgtGGctCgGTCGGaCCcCGTAAcATTgCGgcAaAtGagCTaTtagGGATCGacTatgatCcGGCtGagtgAgaAtAtgGAcCtATcGtggGAgCACCtAtagTtcTaTAGGacgGgcAtcTCGCGcCaaggGcTggGaTTgTCTgtTACctCtagGTAGaGggcTaaatCca
+>read5
+AatcccAgAttcttCcTaTAGgGTagTaAcgcggTgGAgCTGCagAGGTaAgccGtcgGaGGGgagGcAagtGCCggtTGcGAGtcCaTgCcTtCAGgccCtcGCgCTgAcCCtaCgtTtAAaTacAggGttggTccTcaAgcGtcTTCGAtGcTcTaggAGGgaGcCTGgcTAaCTGttCTtGatTGtCgATTtCgAaggAGattagcTTgccg
+```
+input
+```
+faops order ufasta.fa <(faops size ufasta.fa | sort -n -r -k2,2 |cut -f 1) stdout
+```
+
+* ###  replace
+> usage:<br>
+> 　　faops replace [options] <in.fa> <replace.tsv> <out.fa>
+> 
+> options:<br>
+> 　　-s　　　　　only output sequences in the list, like `faops some`<br>
+> 　　-l INT　　　sequence line length [80]
+> 
+> <replace.tsv> is a tab-separated file containing two fields<br>
+> 　　original_name　　　　replace_name
 
