@@ -1,4 +1,3 @@
-#get help
 faops help && echo "$?"
 
 #get count in help 
