@@ -9,19 +9,7 @@
 >* and can be run under all major OSes (including Windows).
 
 faops command:<br>
->* [help](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#help)
->* [count](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#count)
->* [size](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#size)
->* [frag](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#frag)
->* [rc](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#rc)
->* [one](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#one)
->* [some](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#some)
->* [filter](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#filter)
->* [split-name](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-name)
->* [split-about](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#split-about)
->* [n50](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#n50)
->* [order](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#order)
->* [replace](https://github.com/kokonutbaby/faops-documentation/edit/main/README.md#replace)
+>* [help]
 
 ## faops installing and compiling
 ```

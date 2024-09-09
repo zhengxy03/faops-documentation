@@ -1,5 +1,5 @@
 #get help
-faops help
+faops help && echo "$?"
 
 #get count in help 
 faops help | grep "Usage"
