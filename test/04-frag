@@ -1,5 +1,6 @@
+cd ~/faops/test/
 #extract sub-sequences from a fa file
-faops frag ~/faops/test/ufasta.fa 1 10 stdout | grep -v "^>"
+faops frag ufasta.fa 1 10 stdout | grep -v "^>"
 
 #extract sub-sequences from stdin
-faops some ~/faops/test/ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 stdout | grep -v "^>"
+faops some ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 stdout | grep -v "^>"
