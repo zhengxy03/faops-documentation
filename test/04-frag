@@ -1,4 +1,4 @@
-cd ~/faops/test/
+cd ~/faops/test
 #extract sub-sequences from a fa file
 faops frag ufasta.fa 1 10 stdout | grep -v "^>"
 
