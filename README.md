@@ -53,7 +53,8 @@ Options:
     Type "faops command-name" for detailed options of each command.
     Options *MUST* be placed just after command.
 ```
-* ### count #count base statistics
+* ### count
+> faops count - count base statistics in FA file(s).<br>
 > usage:<br>
 > 　　faops count <in.fa> [more_files.fa]
 
@@ -61,8 +62,8 @@ count base statistics in `file`:<br>
 
 input
 ```
-faops count ~/faops/test/ufasta.fa | head -n 2
-#bash -c "faops count ~/faops/test/ufasta.fa | head -n 2"
+faops count ufasta.fa | head -n 2
+#bash -c "faops count ufasta.fa | head -n 2"
 ```
 output
 ```
@@ -73,13 +74,13 @@ count base ststistics in `stdin`:<br>
 
 input
 ```
-cat ~/faops/test/ufasta.fa | faops count stdin| head -n 2
+cat ufasta.fa | faops count stdin| head -n 2
 ```
 count `mixture` of stdin and actual file:<br>
 
 input
 ```
-cat ~/faops/test/ufasta.fa | faops count stdin ~/faops/test/ufasta.fa | wc -l
+cat ufasta.fa | faops count stdin ufasta.fa | wc -l
 ```
 output
 ```
@@ -89,14 +90,15 @@ count `total` bases:<br>
 
 input
 ```
-bash -c "faops count ~/faops/test/ufasta.fa | perl -ne '/^total\\t(\\d+)/ and print \$1'"
-#bash -c "faops count ~/faops/test/ufasta.fa | grep '^total' | cut -f 2"
+bash -c "faops count ufasta.fa | perl -ne '/^total\\t(\\d+)/ and print \$1'"
+#bash -c "faops count ufasta.fa | grep '^total' | cut -f 2"
 ```
 output
 ```
 9317
 ```
-* ### size # count total bases in FA file(s)
+* ### size
+> faops size - count total bases in FA file(s).<br>
 > usage:<br>
 > 　　faops size <in.fa> [more_files.fa]
 > 
@@ -106,7 +108,7 @@ read sequence size from `file`：
 
 input
 ```
-faops size ~/faops/test/ufasta.fa | head -n 2
+faops size ufasta.fa | head -n 2
 ```
 output
 ```
@@ -117,13 +119,13 @@ read from `stdin`:
 
 input
 ```
-cat ~/faops/test/ufasta.fa | faops size stdin| head -n 2
+cat ufasta.fa | faops size stdin| head -n 2
 ```
 `mixture` of stdin and actual file:
 
 input
 ```
-cat ~/faops/test/ufasta.fa | faops size stdin ~/faops/test/ufasta.fa | wc -l
+cat ufasta.fa | faops size stdin ufasta.fa | wc -l
 ```
 output
 ```
@@ -133,20 +135,21 @@ count `total` bases:
 
 input
 ```
-bash -c "faops size ~/faops/test/ufasta.fa | perl -ane '\$c += \$F[1]; END { print qq{\$c\n} }'"
+bash -c "faops size ufasta.fa | perl -ane '\$c += \$F[1]; END { print qq{\$c\n} }'"
 ```
 output
 ```
 9317
 ```
-* ### frag #extract sub-sequence
+* ### frag 
+> faops frag - Extract a piece of DNA from a FA file.<br>
 > usage:<br>
 > 　　　faops frag [options] <in.fa> <start> <end> <out.fa>
 > 
 > options:<br>
 > 　　　-l INT　　　sequence line length [80]
 > 
-> in.fa  == stdin  means reading from stdin
+> in.fa  == stdin  means reading from stdin<br>
 > out.fa == stdout means writing to stdout
 
 extract sub-sequences from a `file`:
@@ -169,7 +172,8 @@ output
 ```
 AGCgCcccaa
 ```
-* ### rc #reverse complement
+* ### rc 
+> faops rc - Reverse complement a FA file.<br>
 > usage:<br>
 >　　　faops rc [options] <in.fa> <out.fa>
 > 
@@ -179,15 +183,12 @@ AGCgCcccaa
 >　　　-c　　　　　just Complement, prepends C_<br>
 >　　　-f STR　　　only RC sequences in this list.file<br>
 >　　　-l INT　　　sequence line length [80]
-> 
-> in.fa  == stdin  means reading from stdin<br>
-> out.fa == stdout means writing to stdout
 
 reverse complement a fa `file`:
 
 input
 ```
-faops rc -n ~/faops/test/ufasta.fa stdout | faops size stdin
+faops rc -n ufasta.fa stdout | faops size stdin
 ```
 output
 ```
@@ -201,7 +202,7 @@ read49  358
 
 input
 ```
-faops rc -n ~/faops/test/ufasta.fa stdout | faops rc -n stdin stdout
+faops rc -n ufasta.fa stdout | faops rc -n stdin stdout
 ```
 output
 ```
@@ -223,27 +224,25 @@ rc with `list.file`:
 
 input
 ```
-faops rc -l 0 -f <(echo read47) ~/faops/test/ufasta.fa stdout | grep '^>RC_'
+faops rc -l 0 -f <(echo read47) ufasta.fa stdout | grep '^>RC_'
 ```
 output
 ```
 >RC_read47
 ```
 * ### one
+> faops one - Extract one fa sequence<br>
 > usage:<br>
-　　　faops some [options] <in.fa> <name> <out.fa>
+>　　　faops some [options] <in.fa> <name> <out.fa>
 > 
 > options:<br>
 >　　　-l INT     sequence line length [80]
-> 
-> in.fa  == stdin  means reading from stdin
-> out.fa == stdout means writing to stdout
 
 extract `one` fa record:
 
 input
 ```
-faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -A 1 '^>read12'| faops one -l 0 ~/faops/test/ufasta.fa read12 stdout
+faops filter -l 0 ufasta.fa stdout | grep -A 1 '^>read12' | faops one -l 0 ufasta.fa read12 stdout
 ```
 output
 ```
@@ -251,21 +250,19 @@ output
 AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaAgacTCCGCcCAcCTAttagccaGcCGtCtGcccCacCaGgGgcTtAtaAGAGgaGGCtttCtaGGTcCcACTtGgggTCaGCCcccaTGCgTGGtCtGTGTcCatgTCCtCCTCTaGCaCCCCTCgCAgctCCtAataCgAAGGaGCAtcaCAgGacgAgacgAcAtTcTcCaACcgtGGctCgGTCGGaCCcCGTAAcATTgCGgcAaAtGagCTaTtagGGATCGacTatgatCcGGCtGagtgAgaAtAtgGAcCtATcGtggGAgCACCtAtagTtcTaTAGGacgGgcAtcTCGCGcCaaggGcTggGaTTgTCTgtTACctCtagGTAGaGggcTaaatCca
 ```
 * ### some
+> faops some - Extract multiple fa sequences<br>
 > usage:<br>
 > 　　faops some [options] <in.fa> <list.file> <out.fa>
 > 
 > options:<br>
 > 　　-i         Invert, output sequences not in the list<br>
 > 　　-l INT     sequence line length [80]
-> 
-> in.fa  == stdin  means reading from stdin<br>
-> out.fa == stdout means writing to stdout
 
 extract `one` fa record:
 
 input
 ```
-faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -A 1 '^>read12'| faops some -l 0 ~/faops/test/ufasta.fa <(echo read12) stdout
+faops filter -l 0 ufasta.fa stdout | grep -A 1 '^>read12'| faops some -l 0 ufasta.fa <(echo read12) stdout
 ```
 output
 ```
@@ -276,7 +273,7 @@ extract some fa records `exclude` ..:
 
 input
 ```
-faops some -i ~/faops/test/ufasta.fa <(echo read12) stdout | grep '^>'
+faops some -i ufasta.fa <(echo read12) stdout | grep '^>'
 ```
 output
 ```
@@ -307,7 +304,7 @@ filter every sequence in `one line`：
 
 input
 ```
-faops filter -l 0 ~/faops/test/ufasta.fa stdout | wc -l
+faops filter -l 0 ufasta.fa stdout | wc -l
 ```
 output
 ```
@@ -317,7 +314,7 @@ filter `blocked` file:
 
 input
 ```
-faops filter -b ~/faops/test/ufasta.fa stdout | wc -l
+faops filter -b ufasta.fa stdout | wc -l
 ```
 output
 ```
@@ -327,7 +324,7 @@ filter identical `headers`:
 
 input
 ```
-faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep '^>'
+faops filter -l 0 ufasta.fa stdout | grep '^>'
 ```
 output
 ```
@@ -339,7 +336,7 @@ filter identical `sequences`:
 
 input
 ```
-faops filter -l 0 ~/faops/test/ufasta.fa stdout | grep -v '^>' | perl -ne 'chomp; print'
+faops filter -l 0 ufasta.fa stdout | grep -v '^>' | perl -ne 'chomp; print'
 ```
 output
 ```
@@ -349,7 +346,7 @@ fliter `-N`:
 
 input
 ```
-faops filter -l 0 -N ~/faops/test/ufasta.fa.gz stdout | grep -v '^>' | perl -ne 'chomp; print'
+faops filter -l 0 -N ufasta.fa.gz stdout | grep -v '^>' | perl -ne 'chomp; print'
 ```
 output
 ```
@@ -403,7 +400,7 @@ ANNG
 
 input
 ```
-faops filter ~/faops/test/test.seq stdout | wc -l
+faops filter test.seq stdout | wc -l
 ```
 output
 ```
@@ -413,7 +410,7 @@ filter `minsize maxsize`:
 
 input
 ```
-faops filter -a 10 -z 50 ~/faops/test/ufasta.fa stdout | grep '^>'
+faops filter -a 10 -z 50 ufasta.fa stdout | grep '^>'
 ```
 output
 ```
@@ -428,7 +425,7 @@ removes `duplicated` ids:
 
 input
 ```
-faops filter -u -a 1 <(cat ~/faops/test/ufasta.fa ~/faops/test/ufasta.fa) stdout | grep '^>'
+faops filter -u -a 1 <(cat ufasta.fa ufasta.fa) stdout | grep '^>'
 ```
 output
 ```
@@ -447,7 +444,7 @@ split `all seq`:
 
 input
 ```
-faops split-name ~/faops/test/ufasta.fa splitnameresult && find splitnameresult -name '*.fa' | wc -l
+faops split-name ufasta.fa result && find result -name '*.fa' | wc -l
 ```
 output
 ```
@@ -457,7 +454,7 @@ split-name `size restrict`:
 
 input
 ```
-faops filter -a 10 ~/faops/test/ufasta.fa stdout | faops split-name stdin splitnameleast10 && find splitnameleast10 -name '*.fa' | wc -l
+faops filter -a 10 ufasta.fa stdout | faops split-name stdin result  && find result -name '*.fa' | wc -l
 ```
 output
 ```
@@ -476,7 +473,7 @@ split 2000 bp:
 
 input
 ```
-faops split-about ~/faops/test/ufasta.fa 2000 split2000bp  && find split2000bp -name '*.fa' | wc -l
+faops split-about ufasta.fa 2000 result && find result -name '*.fa' | wc -l
 ```
 output
 ```
@@ -486,7 +483,7 @@ split `max` file numbers:
 
 input
 ```
-faops split-about -m 2 ~/faops/test/ufasta.fa 2000 maxparts && find maxparts -name'*.fa' | wc -l
+faops split-about -m 2 ufasta.fa 2000 result && find result -name'*.fa' | wc -l
 ```
 output
 ```
@@ -496,22 +493,20 @@ split 2000 bp and size restrict:
 
 input
 ```
-faops filter -a 100 ~/faops/test/ufasta.fa stdout | faops split-about stdin 2000 2000bpandsize && find 2000bpandsize -name '*.fa' | wc -l
+faops filter -a 100 ufasta.fa stdout | faops split-about stdin 2000 result && find result -name '*.fa' | wc -l
 ```
 output
 ```
 4
 ```
-split seq in one file `evenly`:
+split seq in one file `evenly`(sequence number):
 
 input
 ```
-faops split-about ~/faops/test/ufasta.fa 1 123 && find 1 even -name '*.fa' | wc-
-faops split-about -e ~/faops/test/ufasta.fa 1 123 && find 1 even -name '*.fa' | wc-l
+faops split-about -e ufasta.fa 1 result && find result -name '*.fa' | wc -l
 ```
 output
 ```
-50
 26
 ```
 * ### n50
@@ -661,9 +656,9 @@ output
 > faops dazz - Rename records for dazz_db<br>
 > usage:<br>
 >     faops dazz [options] <in.fa> <out.fa>
-
-options:
-    -p STR     prefix of names [read]
-    -s INT     start index [1]
-    -a         don't drop duplicated ids
-    -l INT     sequence line length [80]
+> 
+> options:<br>
+>　　　-p STR　　　prefix of names [read]<br>
+>　　　-s INT　　　start index [1]<br>
+>　　　-a　　　　　don't drop duplicated ids<br>
+>　　　-l INT　　　sequence line length [80]
