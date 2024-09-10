@@ -1,1 +1,9 @@
+cd ~/faops/test
+#replace inline names
+faops replace ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | grep '^>428'
 
+#replace -s = faops some
+faops replace -s ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | wc -l
+
+#with replace.tsv
+faops replace ufasta.fa replace.tsv stdout | grep '^>' | grep -v 'read' | sed 's/v//'
