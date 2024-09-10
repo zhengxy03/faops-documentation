@@ -658,9 +658,9 @@ output
 258
 ```
 * ### dazz
-> faops dazz - Rename records for dazz_db
-usage:
-    faops dazz [options] <in.fa> <out.fa>
+> faops dazz - Rename records for dazz_db<br>
+> usage:<br>
+>     faops dazz [options] <in.fa> <out.fa>
 
 options:
     -p STR     prefix of names [read]
