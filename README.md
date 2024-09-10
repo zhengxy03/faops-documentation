@@ -153,7 +153,7 @@ extract sub-sequences from a `file`:
 
 input
 ```
-faops frag ~/faops/test/ufasta.fa 1 10 stdout | grep -v "^>"
+faops frag ufasta.fa 1 10 stdout | grep -v "^>"
 ```
 output
 ```
@@ -163,7 +163,7 @@ extract sub-sequences from `stdin`:
 
 input
 ```
-faops some ~/faops/test/ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 stdout | grep -v "^>"
+faops some ufasta.fa <(echo read12) stdout | faops frag stdin 1 10 stdout | grep -v "^>"
 ```
 output
 ```
