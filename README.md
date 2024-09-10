@@ -667,8 +667,8 @@ faops `dazz -a`:
 
 input
 ```
-gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz stdin stdout | grep "0_0" | wc -l
-gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz -a stdin stdout | grep "0_0" | wc -l
+gzip -d -c -f ufasta.fa ufasta.fa.gz | faops dazz stdin stdout | grep "0_0" | wc -l
+gzip -d -c -f ufasta.fa ufasta.fa.gz | faops dazz -a stdin stdout | grep "0_0" | wc -l
 ```
 output
 ```
