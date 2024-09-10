@@ -1,6 +1,6 @@
 cd ~/faops/test
 #extract one fa record
-faops filter -l 0 test/ufasta.fa stdout | grep -A 1 '^>read12'| faops one -l 0 ufasta.fa read12 stdout
+faops filter -l 0 ufasta.fa stdout | grep -A 1 '^>read12'| faops one -l 0 ufasta.fa read12 stdout
 
 #test faSomeRecords
 faSomeRecords ufasta.fa <(echo read12) stdout | grep '^>'
