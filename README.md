@@ -657,3 +657,13 @@ output
 ...
 258
 ```
+* ### dazz
+> faops dazz - Rename records for dazz_db
+usage:
+    faops dazz [options] <in.fa> <out.fa>
+
+options:
+    -p STR     prefix of names [read]
+    -s INT     start index [1]
+    -a         don't drop duplicated ids
+    -l INT     sequence line length [80]
