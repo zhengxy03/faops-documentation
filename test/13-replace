@@ -6,4 +6,4 @@ faops replace ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | grep '^>428'
 faops replace -s ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | wc -l
 
 #with replace.tsv
-faops replace ufasta.fa replace.tsv stdout | grep '^>' | grep -v 'read' | sed 's/v//'
+faops replace ufasta.fa replace.tsv stdout | grep '^>' | grep -v 'read' | sed 's/>//'
