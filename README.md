@@ -625,3 +625,35 @@ faops order ufasta.fa <(faops size ufasta.fa | sort -n -r -k2,2 |cut -f 1) stdou
 > <replace.tsv> is a tab-separated file containing two fields<br>
 > 　　original_name　　　　replace_name
 
+replace inline names:
+
+input
+```
+faops replace ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | grep '^>428'
+```
+output
+```
+>428
+```
+replace -s = faops some:
+
+input
+```
+faops replace -s ufasta.fa <(printf "%s\t%s\n" read12 428) stdout | wc -l
+```
+output
+```
+7
+```
+with replace.tsv:
+
+input
+```
+faops replace ufasta.fa replace.tsv stdout | grep '^>' | grep -v 'read' | sed 's/>//'
+```
+output
+```
+359
+...
+258
+```
