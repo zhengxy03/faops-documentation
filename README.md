@@ -630,7 +630,7 @@ output
 ```
 >428
 ```
-replace -s = faops some:
+`replace -s` = faops some:
 
 input
 ```
@@ -640,7 +640,7 @@ output
 ```
 7
 ```
-with replace.tsv:
+with `replace.tsv`:
 
 input
 ```
@@ -653,7 +653,7 @@ output
 258
 ```
 * ### dazz
-> faops dazz - Rename records for dazz_db<br>
+> faops dazz - Rename records for dazz_db(>read/number/0_base-number)<br>
 > usage:<br>
 >     faops dazz [options] <in.fa> <out.fa>
 > 
@@ -662,3 +662,16 @@ output
 >　　　-s INT　　　start index [1]<br>
 >　　　-a　　　　　don't drop duplicated ids<br>
 >　　　-l INT　　　sequence line length [80]
+
+faops `dazz -a`:
+
+input
+```
+gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz stdin stdout | grep "0_0" | wc -l
+gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz -a stdin stdout | grep "0_0" | wc -l
+```
+output
+```
+5
+10
+```

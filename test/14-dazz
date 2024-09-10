@@ -1,0 +1,7 @@
+cd ~/faops/test
+#count 0 base seq
+faops dazz ufasta.fa stdout | grep "0_0" | wc -l
+
+#count deduplicate seq
+gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz stdin stdout | grep "0_0" | wc -l
+gzip -d -c  -f ufasta.fa ufasta.fa.gz | faops dazz -a stdin stdout | grep "0_0" | wc -l
