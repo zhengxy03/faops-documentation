@@ -1,0 +1,8 @@
+cd ~/faops/test
+#count empty seqs
+faops interleave ufasta.fa ufasta.fa.gz | grep "^$" | wc -l
+faops interleave ufasta.fa | grep "^$" | wc -l
+
+#interleave -q
+faops interleave -q R1.fq.gz R2.fq.gz | grep '^!$' | wc -l
+faops interleave -q R1.fq.gz | grep '^!$' | wc -l

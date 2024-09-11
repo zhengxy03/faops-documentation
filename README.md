@@ -675,3 +675,39 @@ output
 5
 10
 ```
+* ### interleave
+> faops interleave - Interleave two PE files<br>
+>　　　　　　　　　　　One file is also OK, output a single `N`.<br>
+>　　　　　　　　　　　With -q, the quality value set to `!` (33)<br>
+> usage:<br>
+>　　　faops interleave [options] <R1.fa> [R2.fa]
+> 
+> options:<br>
+>　　　-q　　　　　write FQ. The inputs must be FQs<br>
+>　　　-p STR　　　prefix of names [read]<br>
+>　　　-s INT　　　start index [0]
+
+count empty seqs:
+
+input
+```
+faops interleave ufasta.fa ufasta.fa.gz | grep "^$" | wc -l
+faops interleave ufasta.fa | grep "^$" | wc -l
+```
+output
+```
+10
+5
+```
+interleave -q:
+
+input
+```
+faops interleave -q R1.fq.gz R2.fq.gz | grep '^!$' | wc -l
+faops interleave -q R1.fq.gz | grep '^!$' | wc -l
+```
+output
+```
+0
+25
+```

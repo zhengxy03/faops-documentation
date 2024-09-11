@@ -1,5 +1,5 @@
 cd ~/faops/test
-#count 0 base seq
+#count empty seq
 faops dazz ufasta.fa stdout | grep "0_0" | wc -l
 
 #count deduplicate seq
