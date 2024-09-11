@@ -1,0 +1,4 @@
+cd ~/faops/test
+#masked region
+faops masked ufasta.fa | grep '^read46' | head -n 1
+

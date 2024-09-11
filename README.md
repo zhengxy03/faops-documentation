@@ -775,3 +775,19 @@ output
 >read0(+):10
 C
 ```
+* ### masked
+> faops masked - Masked (or gaps) regions in fasta files<br>
+> usage:<br>
+>　　faops masked [options] <in.fa> [more_files.fa]
+> 
+> options:<br>
+>　　-g　　　　　only record regions of N/n
+
+input
+```
+faops masked ufasta.fa | grep '^read46' | head -n 1
+```
+output
+```
+read46:3-4
+```
