@@ -610,6 +610,7 @@ faops order ufasta.fa <(faops size ufasta.fa | sort -n -r -k2,2 |cut -f 1) stdou
 ```
 
 * ###  replace
+>
 > usage:<br>
 > 　　faops replace [options] <in.fa> <replace.tsv> <out.fa>
 > 
@@ -654,6 +655,7 @@ output
 ```
 * ### dazz
 > faops dazz - Rename records for dazz_db(>read/number/0_base-number)<br>
+> 
 > usage:<br>
 >     faops dazz [options] <in.fa> <out.fa>
 > 
@@ -777,6 +779,7 @@ C
 ```
 * ### masked
 > faops masked - Masked (or gaps) regions in fasta files<br>
+> 
 > usage:<br>
 >　　faops masked [options] <in.fa> [more_files.fa]
 > 
