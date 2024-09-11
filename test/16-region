@@ -1,0 +1,13 @@
+cd ~/faops/test
+#extract regions from region.txt
+faops region -l 0 ufasta.fa region.txt stdout
+
+#extract regions from echo
+faops region -l 0 ufasta.fa <(echo read0:1-10) stdout
+faops region -l 0 ufasta.fa <(echo read1:1-10,50-60) stdout
+
+#extract 1 base
+faops region -l 0 ufasta.fa <(echo read0:10) stdout
+
+#region -s
+faops region -s -l 0 ufasta.fa <(echo read0:10) stdout

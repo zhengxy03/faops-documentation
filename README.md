@@ -711,3 +711,67 @@ output
 0
 25
 ```
+* ### region
+> faops region - Extract regions from a FA file<br>
+> usage:<br>
+>　　faops region [options] <in.fa> <region.txt> <out.fa>
+> 
+> options:<br>
+>　　-s    　　　add strand '(+)' to headers<br>
+>　　-l INT　　　sequence line length [80]
+> 
+> <region.txt> is a text file containing one field<br>
+>　　seq_name:begin-end[,begin-end]
+
+extract regions from `region.txt`:
+
+input
+```
+faops region -l 0 ufasta.fa region.txt stdout
+```
+output
+```
+>read0:1-10
+tCGTTTAACC
+>read12:50-60
+TtgTgtcACag
+```
+extract regions from echo:
+
+input
+```
+faops region -l 0 ufasta.fa <(echo read0:1-10) stdout
+faops region -l 0 ufasta.fa <(echo read1:1-10,50-60) stdout
+```
+output
+```
+>read0:1-10
+tCGTTTAACC
+
+>read0:1-10
+tCGTTTAACC
+>read12:50-60
+TtgTgtcACag
+```
+extract 1 base:
+
+input
+```
+faops region -l 0 ufasta.fa <(echo read0:10) stdout
+```
+output
+```
+>read0:10
+C
+```
+`region -s`:
+
+input
+```
+faops region -s -l 0 ufasta.fa <(echo read0:10) stdout
+```
+output
+```
+>read0(+):10
+C
+```
