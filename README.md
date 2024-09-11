@@ -9,7 +9,23 @@
 >* and can be run under all major OSes (including Windows).
 
 faops command:<br>
->* [help]
+>* [help](https://github.com/zhengxy03/faops-documentation#help)
+>* [count](https://github.com/zhengxy03/faops-documentation#count)
+>* [size](https://github.com/zhengxy03/faops-documentation#size)
+>* [frag](https://github.com/zhengxy03/faops-documentation#frag)
+>* [rc](https://github.com/zhengxy03/faops-documentation#rc)
+>* [one](https://github.com/zhengxy03/faops-documentation#one)
+>* [some](https://github.com/zhengxy03/faops-documentation#some)
+>* [filter](https://github.com/zhengxy03/faops-documentation#filter)
+>* [split-name](https://github.com/zhengxy03/faops-documentation#split-name)
+>* [split-about](https://github.com/zhengxy03/faops-documentation#split-about)
+>* [n50](https://github.com/zhengxy03/faops-documentation#n50)
+>* [order](https://github.com/zhengxy03/faops-documentation#order)
+>* [replace](https://github.com/zhengxy03/faops-documentation#replace)
+>* [dazz](https://github.com/zhengxy03/faops-documentation#dazz)
+>* [interleave](https://github.com/zhengxy03/faops-documentation#interleave)
+>* [region](https://github.com/zhengxy03/faops-documentation#region)
+>* [masked](https://github.com/zhengxy03/faops-documentation#masked)
 
 ## faops installing and compiling
 ```
