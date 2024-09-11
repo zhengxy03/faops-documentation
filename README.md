@@ -70,7 +70,8 @@ Options:
     Options *MUST* be placed just after command.
 ```
 * ### count
-> faops count - count base statistics in FA file(s).<br>
+> faops count - count base statistics in FA file(s).
+> 
 > usage:<br>
 > 　　faops count <in.fa> [more_files.fa]
 
@@ -114,7 +115,8 @@ output
 9317
 ```
 * ### size
-> faops size - count total bases in FA file(s).<br>
+> faops size - count total bases in FA file(s).
+> 
 > usage:<br>
 > 　　faops size <in.fa> [more_files.fa]
 > 
@@ -159,6 +161,7 @@ output
 ```
 * ### frag 
 > faops frag - Extract a piece of DNA from a FA file.<br>
+> 
 > usage:<br>
 > 　　　faops frag [options] <in.fa> <start> <end> <out.fa>
 > 
@@ -190,6 +193,7 @@ AGCgCcccaa
 ```
 * ### rc 
 > faops rc - Reverse complement a FA file.<br>
+> 
 > usage:<br>
 >　　　faops rc [options] <in.fa> <out.fa>
 > 
@@ -247,7 +251,8 @@ output
 >RC_read47
 ```
 * ### one
-> faops one - Extract one fa sequence<br>
+> faops one - Extract one fa sequence
+> 
 > usage:<br>
 >　　　faops some [options] <in.fa> <name> <out.fa>
 > 
@@ -267,6 +272,7 @@ AGCgCcccaaaaGGaTgCGTGttagaCACTAAgTtCcAtGgctGTatccTtgTgtcACagcGTGaaCCCAaTAagatCaA
 ```
 * ### some
 > faops some - Extract multiple fa sequences<br>
+> 
 > usage:<br>
 > 　　faops some [options] <in.fa> <list.file> <out.fa>
 > 
@@ -301,6 +307,8 @@ read13
 read49
 ```
 * ### filter
+> faops filter - Filter fa records
+> 
 > usage:<br>
 > 　　faops filter [options] <in.fa> <out.fa>
 > 
@@ -450,6 +458,8 @@ read0
 read49
 ```
 * ### split-name
+> faops split-name - Split an fa file into several files<br>
+>　　　　　　　　　　　Using sequence names as file names<br>
 > usage:<br>
 > 　　faops split-name [options] <in.fa> <outdir>
 > 
@@ -477,6 +487,8 @@ output
 44
 ```
 * ### split-about
+> faops split-about - Split an fa file into several files<br>
+>　　　　　　　　　　　　of about approx_size bytes each by record<br>
 > usage:<br>
 > 　　faops split-about [options] <in.fa> <approx_size> <outdir>
 > 
@@ -526,6 +538,8 @@ output
 26
 ```
 * ### n50
+> faops n50 - compute N50 and other statistics<br>
+> 
 > usage:<br>
 > 　　faops n50 [options] <in.fa> [more_files.fa]
 > 
@@ -603,6 +617,8 @@ C       50
 ```
 
 * ### order
+> faops order - Extract multiple fa sequences by the given order<br>
+> 
 > usage:<br>
 > 　　faops order [options] <in.fa> <list.file> <out.fa>
 > 
@@ -626,7 +642,8 @@ faops order ufasta.fa <(faops size ufasta.fa | sort -n -r -k2,2 |cut -f 1) stdou
 ```
 
 * ###  replace
->
+> faops replace - Replace headers from a FA file<br>
+> 
 > usage:<br>
 > 　　faops replace [options] <in.fa> <replace.tsv> <out.fa>
 > 
